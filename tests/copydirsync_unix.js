@@ -107,7 +107,6 @@ module.exports = testCase({
 
         test.ok(fs.existsSync(dir), 'Folders should exist');
 
-        wrench.mkdirSyncRecursive(testdir, 0777);
         wrench.copyDirSyncRecursive(dir, testdir, { excludeHiddenUnix: false });
 
         var files = wrench.readdirSyncRecursive(testdir);
@@ -124,7 +123,6 @@ module.exports = testCase({
 
         test.ok(fs.existsSync(dir), 'Folders should exist');
 
-        wrench.mkdirSyncRecursive(testdir, 0777);
         wrench.copyDirSyncRecursive(dir, testdir, { excludeHiddenUnix: true });
 
         var files = wrench.readdirSyncRecursive(testdir);
@@ -141,7 +139,6 @@ module.exports = testCase({
 
         test.ok(fs.existsSync(dir), 'Folders should exist');
 
-        wrench.mkdirSyncRecursive(testdir, 0777);
         wrench.copyDirSyncRecursive(dir, testdir, { excludeHiddenUnix: false, inflateSymlinks: true });
 
         var files = wrench.readdirSyncRecursive(testdir);
@@ -179,7 +176,6 @@ module.exports = testCase({
 
         test.ok(fs.existsSync(dir), 'Folders should exist');
 
-        wrench.mkdirSyncRecursive(testdir, 0777);
         wrench.copyDirSyncRecursive(dir, testdir, { excludeHiddenUnix: false, inflateSymlinks: false });
 
         var files = wrench.readdirSyncRecursive(testdir);
@@ -197,14 +193,14 @@ module.exports = testCase({
 
         test.ok(fs.existsSync(dir), 'Folders should exist');
 
-        wrench.mkdirSyncRecursive(testdir1, 0777);
+        // wrench.mkdirSyncRecursive(testdir1, 0777);
         wrench.copyDirSyncRecursive(dir, testdir1, { excludeHiddenUnix: false });
         wrench.copyDirSyncRecursive(dir, testdir2, { excludeHiddenUnix: false });
 
         fs.writeFileSync(path.join(testdir1, ".hidden.txt"), 'just some text for .hidden.txt');
         fs.writeFileSync(path.join(testdir1, "bar.txt"), 'just some text for bar.txt');
 
-        wrench.copyDirSyncRecursive(testdir1, testdir2, { preserve: true, excludeHiddenUnix: false, preserveFiles: true });
+        wrench.copyDirSyncRecursive(testdir1, testdir2, { excludeHiddenUnix: false, preserveFiles: true });
 
         var files = wrench.readdirSyncRecursive(testdir2);
 
@@ -222,14 +218,14 @@ module.exports = testCase({
 
         test.ok(fs.existsSync(dir), 'Folders should exist');
 
-        wrench.mkdirSyncRecursive(testdir1, 0777);
+        // wrench.mkdirSyncRecursive(testdir1, 0777);
         wrench.copyDirSyncRecursive(dir, testdir1, { excludeHiddenUnix: false });
         wrench.copyDirSyncRecursive(dir, testdir2, { excludeHiddenUnix: false });
 
         fs.writeFileSync(path.join(testdir1, ".hidden.txt"), 'just some text for .hidden.txt');
         fs.writeFileSync(path.join(testdir1, "bar.txt"), 'just some text for bar.txt');
 
-        wrench.copyDirSyncRecursive(testdir1, testdir2, { preserve: true, excludeHiddenUnix: false, preserveFiles: false });
+        wrench.copyDirSyncRecursive(testdir1, testdir2, { forceDelete: true, excludeHiddenUnix: false, preserveFiles: false });
 
         var files = wrench.readdirSyncRecursive(testdir2);
 
